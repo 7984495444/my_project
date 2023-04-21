@@ -23,5 +23,13 @@ jobs:
     - run: npm ci
     - run: npm build --if-present
     - run: pm2 restart server.js
+    - name: Copy To Deploy Server
+      run: |
+       rsync -zhvr . ubuntu@3.84.145.169:/home/ubuntu/node-app
+    - name: Start Application
+      run: |
+       ssh -o StrictHostKeyChecking=no ubuntu@3.84.145.169 'pm2 restart api'
+    
+    
 
      
