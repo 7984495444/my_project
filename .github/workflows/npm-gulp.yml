@@ -17,4 +17,4 @@ jobs:
          scp -r /home/ubuntu/demo_nodchat/* /home/ubuntu/node-app
       - name: Start Application
         run: |
-         ssh -o StrictHostKeyChecking=no ubuntu@3.84.8.202 'pm2 restart api'
+         pm2 restart api
