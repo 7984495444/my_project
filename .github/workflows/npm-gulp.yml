@@ -1,35 +1,20 @@
-name: NodeJS 
+name: Deploy to EC2
 
 on:
   push:
-    branches: [ "main" ]
- 
+    branches: [ main ]
+
 jobs:
-  build:
+  deploy:
     runs-on: self-hosted
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm build --if-present
-    - run: pm2 restart server.js
-    - name: Copy To Deploy Server
-      run: |
-       rsync -avz . ubuntu@3.84.145.169:/home/ubuntu/node-app
-    - name: Start Application
-      run: |
-       ssh -o StrictHostKeyChecking=no ubuntu@3.84.145.169 'pm2 restart api'
-    
-    
-
-     
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: copy to Deploy server 
+        run: |
+         rsync -zhvr . ubuntu@3.84.8.202:/home/ubuntu/node-app
+      - name: Start Application
+        run: |
+         ssh -o StrictHostKeyChecking=no ubuntu@3.84.8.202 'pm2 restart api'
