@@ -15,4 +15,4 @@ jobs:
       - name: copy to Deploy server 
         run: |
          scp -r /home/ubuntu/demo_nodchat/* /home/ubuntu/node-app
-     
+ 
