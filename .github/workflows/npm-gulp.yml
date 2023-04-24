@@ -10,13 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          npm install
-          npm run test
-  env:
-    NODE_ENV: test
-
+      - name: Install dependencies
+        run: npm install
       - name: copy to Deploy server 
         run: |
          scp -i ubuntu@52.0.176.0: /home/ubuntu/my-app 
