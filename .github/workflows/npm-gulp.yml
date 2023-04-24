@@ -14,5 +14,8 @@ jobs:
         run: npm install
       - name: copy to Deploy server 
         run: |
-         scp -r /home/ubuntu/demo_nodchat/* /home/ubuntu/node-app
- 
+         rsync -zhvr . ubuntu@52.0.176.0:/home/ubuntu/node-app
+      - name: Start Application
+        run: |
+         ssh -o StrictHostKeyChecking=no ubuntu@52.0.176.0 'pm2 restart server'
+       
