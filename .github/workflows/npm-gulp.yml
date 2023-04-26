@@ -17,6 +17,6 @@ jobs:
          scp -r /home/ubuntu/my_project/* /home/ubuntu/my-app
       - name: Start Application
         run: |
-         ssh -o StrictHostKeyChecking=no ubuntu@3.86.87.167 'pm2 restart server'
+         ssh -o StrictHostKeyChecking=no ubuntu@35.173.133.210 'pm2 restart server'
      
        
